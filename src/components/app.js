@@ -12,9 +12,9 @@ export default function App(props) {
         <h3><Link className="title-journey" to="/">A Journey of Life</Link></h3>
         <main>
           <Route exact path="/" component={Journal} />
-          <Route exact path="/add" component={AddForm} />
-          <Route exact path="/get" component={GetSearch} />
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route path="/sign-up" component={SignUp} />
+          <Route path="/add" component={AddForm} />
+          <Route path="/get" component={GetSearch} />
         </main>
       </div>
     </Router>

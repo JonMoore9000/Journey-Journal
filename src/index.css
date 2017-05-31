@@ -30,6 +30,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   transition: .6s;
+  text-shadow: 3px 3px 3px black;
 }
 
 .home-info {
@@ -46,7 +47,7 @@ h3 {
 
 .title-journey:hover {
   /*color: #B2B2FF;*/
-  text-shadow: 3px 3px 3px black;
+  text-shadow: none;
 }
 
 button {
