@@ -27,6 +27,10 @@ app.post('/logs', (req, res) => {
   res.json(res.body);
   });
 
+  app.post('/users', (req, res) => {
+    res.json(res.body);
+    });
+
 let server;
 
 function runServer() {
