@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {savePlace} from '../actions';
+//import {savePlace} from '../actions';
 import {saveData} from '../actions';
 
 class AddForm extends React.Component {

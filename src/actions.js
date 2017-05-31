@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
 //import Endpoint from '../../config'
 
 export const SAVE_DATA = 'SAVE_DATA';
@@ -6,11 +7,12 @@ export const POST_DATA_SUCCESS = 'POST_DATA_SUCCESS';
 export const POST_DATA_FAILURE = 'POST_DATA_FAILURE';
 export const POST_DATA_TRIGGERED = 'POST_DATA_TRIGGERED';
 
+const saveSuccess = () => {
+    const yay = "Your journey is saved!";
+
+};
+
 export function saveData(thePlace, theDate, theNotes) {
-  // need to have a response if succeed and error if not
-  //console.log(rest);
-  //3000
-  //config file with endpoints
   const promise = fetch('http://localhost:8080/logs', {
     method: 'POST',
     headers: {
@@ -46,6 +48,37 @@ export function signUpUser(username1, password1) {
   return {
         onRequest: POST_DATA_TRIGGERED,
         onSuccess: POST_DATA_SUCCESS,
+        onFailure: POST_DATA_FAILURE,
+        promise,
+    };
+}
+
+const handleCreateResponse = (response, dispatch) => {
+    if(POST_DATA_TRIGGERED) {
+      BrowserRouter.push('/main');
+    }
+    dispatch({
+        type: POST_DATA_SUCCESS,
+        response,
+    });
+};
+
+export function loginUser(username1, password1) {
+  const promise = fetch('http://localhost:8080/users/login', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(username1 + ":" + password1),
+    },
+    body: JSON.stringify({
+      username: username1,
+      password: password1,
+    })
+  });
+  return {
+        onRequest: POST_DATA_TRIGGERED,
+        onSuccess: handleCreateResponse,
         onFailure: POST_DATA_FAILURE,
         promise,
     };

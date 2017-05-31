@@ -1,6 +1,6 @@
 import React from 'react';
-import AddMemory from './new-memory';
-import OldMemory from './old-memory';
+//import AddMemory from './new-memory';
+//import OldMemory from './old-memory';
 //import AddForm from './add-form';
 import Login  from './login';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
