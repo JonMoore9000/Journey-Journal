@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const jwt = require('express-jwt');
 const app = express();
 
 const {router: adventureRouter} = require('./logs');
@@ -19,6 +20,18 @@ app.use(function(req, res, next) {
 });
 
 const {PORT, DATABASE_URL} = require('./config');
+
+// protected endpoint /main. token authentication
+app.get('/main',
+  jwt({secret: 'shhhhhhared-secret'}),
+  function(req, res) {
+    if (!req.user.admin) return res.sendStatus(401);
+    res.sendStatus(200);
+  });
+
+  jwt({ secret: 'shhhhhhared-secret',
+  audience: '/main',
+  issuer: '/login' })
 
 app.use('/logs', adventureRouter);
 app.use('/users', userRouter);

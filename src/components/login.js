@@ -13,7 +13,7 @@ export class loginThing extends React.Component {
 }
 
 login(e) {
-  e.preventDefault();
+ e.preventDefault();
  const userName = this.username.value;
  const passWord = this.password.value;
  console.log(userName);

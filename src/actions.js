@@ -57,6 +57,7 @@ export function signUpUser(username1, password1) {
 }
 
 export function loginUser(username1, password1) {
+  isAuthenticated: true;
   const mainPage = (response, dispatch) => {
       if(true) {
         history.push('/main');
@@ -76,7 +77,8 @@ export function loginUser(username1, password1) {
     body: JSON.stringify({
       username: username1,
       password: password1,
-    })
+    }),
+    auth_token: 'secret'
   });
   return {
         onRequest: POST_DATA_TRIGGERED,
