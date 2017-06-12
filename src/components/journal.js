@@ -15,7 +15,6 @@ export default class Journal extends React.Component {
     <div className="container">
     <Link to='sign-up'><button>Sign Up</button></Link>
       <p className="home-info">A journal that allows the user to document their travels and look back and see where they have been.</p>
-      <Login />
     </div>
   )}
 }

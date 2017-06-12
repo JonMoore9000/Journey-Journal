@@ -161,20 +161,20 @@ router.get('/login',
 router.post('/login', function (req, res, next) {
     passport.authenticate('basic', function (err, user, info) {
         if (err) {
-            return console.log('Error authenticating user');
+            return console.log(err);
         }
         if (!user) {
             return res.status(401).json({
                 message: 'Username/Password Incorrect'
             });
         }
+        return res.status(200).json({
+            user: user.username
+        });
         req.logIn(user, function (err) {
             if (err) {
-                return console.log('Error authenticating user');
+                return console.log(err);
             }
-            return res.status(200).json({
-                user: user.username
-            });
         });
     })(req, res, next);
 });

@@ -17,7 +17,7 @@ export default function promiseMiddleware({ dispatch, getState }) {
     return next => (action) => {
         const { promise, onRequest, onSuccess, onFailure, ...rest } = action;
         if (!promise) {
-            // if action dispatched is not a promise, just send it to the next processor
+            // if action dispatched is not a promise, just send it to the next processorsole
             return next(action);
         }
 

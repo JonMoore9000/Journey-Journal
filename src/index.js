@@ -5,11 +5,12 @@ import store from './store';
 //import Journal from './components/journal';
 import App from './components/app';
 //import AddForm from './components/add-form';
+import AuthExample from './components/app';
 import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AuthExample />
   </Provider>,
   document.getElementById('root')
 );

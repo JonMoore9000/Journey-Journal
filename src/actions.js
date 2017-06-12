@@ -1,5 +1,8 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
+import { push } from 'react-router-redux';
+import history from './history';
+
 //import Endpoint from '../../config'
 
 export const SAVE_DATA = 'SAVE_DATA';
@@ -53,17 +56,16 @@ export function signUpUser(username1, password1) {
     };
 }
 
-const handleCreateResponse = (response, dispatch) => {
-    if(POST_DATA_TRIGGERED) {
-      BrowserRouter.push('/main');
-    }
-    dispatch({
-        type: POST_DATA_SUCCESS,
-        response,
-    });
-};
-
 export function loginUser(username1, password1) {
+  const mainPage = (response, dispatch) => {
+      if(true) {
+        history.push('/main');
+      }
+      dispatch({
+          type: POST_DATA_SUCCESS,
+          response,
+      });
+  };
   const promise = fetch('http://localhost:8080/users/login', {
     method: 'POST',
     headers: {
@@ -78,7 +80,7 @@ export function loginUser(username1, password1) {
   });
   return {
         onRequest: POST_DATA_TRIGGERED,
-        onSuccess: handleCreateResponse,
+        onSuccess: mainPage,
         onFailure: POST_DATA_FAILURE,
         promise,
     };

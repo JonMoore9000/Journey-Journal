@@ -11,9 +11,9 @@ export default class Front extends React.Component {
 
   render() {
   return(
-    <div className="container">
-    <AddMemory />
-    <OldMemory />
-    </div>
+      <div className="container">
+        <AddMemory />
+        <OldMemory />
+      </div>
   )}
 }
