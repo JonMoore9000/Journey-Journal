@@ -2,8 +2,11 @@ const {BasicStrategy} = require('passport-http');
 const express = require('express');
 const jsonParser = require('body-parser').json();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 const User = require('./models');
+
+const { SECRET, EXPIRATIONTIME } = require('../config');
 
 const router = express.Router();
 
@@ -153,30 +156,38 @@ const basicStrategy = new BasicStrategy(function(username, password, callback) {
 passport.use(basicStrategy);
 router.use(passport.initialize());
 
-router.get('/login',
-  passport.authenticate('basic', {session: false}),
-  (req, res) => res.json({user: req.user.apiRepr()})
-);
-
-router.post('/login', function (req, res, next) {
-    passport.authenticate('basic', function (err, user, info) {
-        if (err) {
-            return console.log(err);
-        }
+router.post('/login', (req, res) => {
+    const {username, password} = req.body;
+    if (!req.body.username || !req.body.password) {
+        return res.status(400).json({message: 'missing field in body'});
+    }
+    User
+    .findOne({username: username})
+    .exec()
+    .then(_user => {
+        const user = _user;
         if (!user) {
-            return res.status(401).json({
-                message: 'Username/Password Incorrect'
+            return res.status(401).json({message: 'Incorrect username.'});
+        }
+        return user;
+    })
+    .then((user)=> {
+        if (!user.validatePassword(password)) {
+            return res.status(401).json({message: 'Incorrect password.'});
+        } else {
+            const token = jwt.sign(user, SECRET);
+            return res.status(200).json({
+                success: true,
+                token: 'JWT ' + token,
+                tokenExpiration: new Date(Date.now() + EXPIRATIONTIME),
+                user: user.apiRepr()
             });
         }
-        return res.status(200).json({
-            user: user.username
-        });
-        req.logIn(user, function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-    })(req, res, next);
+    })
+    .catch(err => {
+        console.log('error ' + err);
+        return res.status(500).json({message: 'Internal server error'});
+    });
 });
 
 module.exports = router;

@@ -22,16 +22,6 @@ app.use(function(req, res, next) {
 const {PORT, DATABASE_URL} = require('./config');
 
 // protected endpoint /main. token authentication
-app.get('/main',
-  jwt({secret: 'shhhhhhared-secret'}),
-  function(req, res) {
-    if (!req.user.admin) return res.sendStatus(401);
-    res.sendStatus(200);
-  });
-
-  jwt({ secret: 'shhhhhhared-secret',
-  audience: '/main',
-  issuer: '/login' })
 
 app.use('/logs', adventureRouter);
 app.use('/users', userRouter);
@@ -43,6 +33,30 @@ app.post('/logs', (req, res) => {
   app.post('/users', (req, res) => {
     res.json(res.body);
     });
+
+var apiRoutes = express.Router();
+
+// verify token
+apiRoutes.use(function(req, res, next) {
+  var token = req.response.token || req.query.token || req.headers['x-access-token'];
+  if (token) {
+    jwt.verify(token, app.get('secret'), function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+    });
+  }
+});
+
+app.use('/main', apiRoutes);
 
 let server;
 

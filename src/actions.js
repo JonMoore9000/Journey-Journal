@@ -57,8 +57,9 @@ export function signUpUser(username1, password1) {
 }
 
 export function loginUser(username1, password1) {
-  isAuthenticated: true;
   const mainPage = (response, dispatch) => {
+    sessionStorage.removeItem('secret', response.token);
+    sessionStorage.setItem('secret', response.token);
       if(true) {
         history.push('/main');
       }
@@ -78,7 +79,6 @@ export function loginUser(username1, password1) {
       username: username1,
       password: password1,
     }),
-    auth_token: 'secret'
   });
   return {
         onRequest: POST_DATA_TRIGGERED,

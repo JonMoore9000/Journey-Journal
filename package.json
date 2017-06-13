@@ -8,6 +8,7 @@
     "express": "^4.15.3",
     "history": "^4.6.1",
     "json-parser": "^1.1.5",
+    "jsonwebtoken": "^7.4.1",
     "mongo": "^0.1.0",
     "mongodb": "^2.2.27",
     "mongoose": "^4.10.3",
