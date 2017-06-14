@@ -56,24 +56,22 @@ export function signUpUser(username1, password1) {
     };
 }
 
+const mainPage = (response, dispatch) => {
+  sessionStorage.removeItem('secret', response.token);
+  sessionStorage.setItem('secret', response.token);
+    history.push('/main');
+    dispatch({
+        type: POST_DATA_SUCCESS,
+        response,
+    });
+};
+
 export function loginUser(username1, password1) {
-  const mainPage = (response, dispatch) => {
-    sessionStorage.removeItem('secret', response.token);
-    sessionStorage.setItem('secret', response.token);
-      if(true) {
-        history.push('/main');
-      }
-      dispatch({
-          type: POST_DATA_SUCCESS,
-          response,
-      });
-  };
   const promise = fetch('http://localhost:8080/users/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa(username1 + ":" + password1),
     },
     body: JSON.stringify({
       username: username1,

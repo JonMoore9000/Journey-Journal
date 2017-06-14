@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
-import history from '../history'
+import {Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
+import history from '../history';
 import Journal from './journal';
 import AddForm from './add-form';
 import GetSearch from './old-search';
@@ -12,7 +12,6 @@ import loginThing from './login';
 const AuthExample = () => (
   <Router history={history}>
     <div>
-      <AuthButton/>
       <ul>
         <li><Link to="/public">Public Page</Link></li>
         <li><Link to="/main">Protected Page</Link></li>
@@ -24,33 +23,17 @@ const AuthExample = () => (
   </Router>
 )
 
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
+const hasToken = () => {
+  const token = sessionStorage.getItem('secret');
+  if(token) {
+    return true;
   }
+  return false;
 }
-
-const AuthButton = withRouter(({ history }) => (
-  fakeAuth.isAuthenticated ? (
-    <p>
-      Welcome! <button onClick={() => {
-        fakeAuth.signout(() => history.push('/'))
-      }}>Sign out</button>
-    </p>
-  ) : (
-    <p>You are not logged in.</p>
-  )
-))
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
+    hasToken() ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
@@ -63,35 +46,5 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 const Public = () => <h3>Public</h3>
 const Protected = () => <h3>Protected</h3>
-
-class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
-  render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
-
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
-
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}
 
 export default AuthExample
