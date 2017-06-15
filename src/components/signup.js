@@ -13,11 +13,11 @@ export class SignUp extends React.Component {
 
 render() {
   return(
-    <div className="container">
+    <div>
     <form>
-    <h3>Sig up to start your making Memories</h3>
-      <input placeholder="username" ref={input => {this.username = input}}></input>
-      <input placeholder="password" type="password" ref={input => {this.password = input}}></input>
+    <h3>Sig up to start your making Memories</h3><br></br>
+      <input placeholder="username" ref={input => {this.username = input}}></input><br></br>
+      <input placeholder="password" type="password" ref={input => {this.password = input}}></input><br></br>
       <button onClick=
       {this.userSignUp.bind(this)}>Sign Up</button>
     </form>

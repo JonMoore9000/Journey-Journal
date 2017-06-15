@@ -24,9 +24,9 @@ login(e) {
 render() {
   return(
     <form>
-    <h3>Login to start your Journey</h3>
-      <input placeholder="username" ref={input => {this.username = input}}></input>
-      <input placeholder="password" type="password"ref={input => {this.password = input}}></input>
+    <h3>Login to start your Journey</h3><br></br>
+      <input placeholder="username" ref={input => {this.username = input}}></input><br></br>
+      <input placeholder="password" type="password"ref={input => {this.password = input}}></input><br></br>
       <button onClick={this.login.bind(this)}>Login</button>
     </form>
   )

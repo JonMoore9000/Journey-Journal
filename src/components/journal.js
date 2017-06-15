@@ -1,10 +1,6 @@
 import React from 'react';
-//import AddMemory from './new-memory';
-//import OldMemory from './old-memory';
-//import AddForm from './add-form';
+import {Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
 import Login  from './login';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
 export default class Journal extends React.Component {
   constructor(props) {
     super(props);
@@ -13,8 +9,10 @@ export default class Journal extends React.Component {
   render() {
   return(
     <div className="container">
-    <Link to='sign-up'><button>Sign Up</button></Link>
+    <h3 className="title">Travel Journal</h3>
+    <Link to='/sign-up'><button>Sign Up</button></Link>
       <p className="home-info">A journal that allows the user to document their travels and look back and see where they have been.</p>
+      <Link to='/login'><button>Login</button></Link>
     </div>
   )}
 }

@@ -36,6 +36,14 @@ export function saveData(thePlace, theDate, theNotes) {
     };
 }
 
+const loginPage = (response, dispatch) => {
+    history.push('/login');
+    dispatch({
+        type: POST_DATA_SUCCESS,
+        response,
+    });
+};
+
 export function signUpUser(username1, password1) {
   const promise = fetch('http://localhost:8080/users', {
     method: 'POST',
@@ -50,7 +58,7 @@ export function signUpUser(username1, password1) {
   });
   return {
         onRequest: POST_DATA_TRIGGERED,
-        onSuccess: POST_DATA_SUCCESS,
+        onSuccess: loginPage,
         onFailure: POST_DATA_FAILURE,
         promise,
     };

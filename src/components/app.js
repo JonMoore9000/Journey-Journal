@@ -7,18 +7,20 @@ import GetSearch from './old-search';
 //import SignUp from './signup';
 import Front from './front';
 import loginThing from './login';
+import NewMemory from './add-form';
+import OldMemory from './old-search';
+import SignUp from './signup';
 
 
 const AuthExample = () => (
   <Router history={history}>
     <div>
-      <ul>
-        <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/main">Protected Page</Link></li>
-      </ul>
-      <Route path="/public" component={Journal}/>
+      <Route exact path="/" component={Journal}/>
       <Route path="/login" component={loginThing}/>
+      <Route path="/sign-up" component={SignUp}/>
       <PrivateRoute path="/main" component={Front}/>
+      <PrivateRoute path="/add" component={NewMemory}/>
+      <PrivateRoute path="/get" component={OldMemory}/>
     </div>
   </Router>
 )

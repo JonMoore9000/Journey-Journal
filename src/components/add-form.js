@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 //import {savePlace} from '../actions';
 import {saveData} from '../actions';
+import {Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
 
 class AddForm extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class AddForm extends React.Component {
 
 render() {
  return(
+   <div>
+   <Link to="/main"><h3 className="title-journey">Travel Journal</h3></Link>
   <form className="form">
    <h4>Add a Memory</h4><br></br>
     <p className="add-info">Keep track of all the fun and amazing places you
@@ -26,6 +29,7 @@ render() {
     <button className="save" type="button" onClick=
     {this.handleSave.bind(this)}>Save</button>
   </form>
+  </div>
  );
 }
  handleSave() {
