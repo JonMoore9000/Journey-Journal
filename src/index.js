@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import store from './store';
-//import Journal from './components/journal';
+import store from './redux/store/store';
 import App from './components/app';
-//import AddForm from './components/add-form';
 import AuthExample from './components/app';
 import './index.css';
 
