@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/logs', function(req, res) {
-  console.log(res.body);
+  res.json({});
 });
 
 // connect to db
@@ -143,7 +143,7 @@ apiRoutes.get('/get', passport.authenticate('jwt', { session: false }), function
   res.send('It worked! User id is: ' + req.user._id + '.');
 });
 
-apiRoutes.get('/add', passport.authenticate('jwt', { session: false }), function(req, res) {
+apiRoutes.post('/add', passport.authenticate('jwt', { session: false }), function(req, res) {
   res.send('It worked! User id is: ' + req.user._id + '.');
 });
 

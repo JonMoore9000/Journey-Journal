@@ -1,13 +1,13 @@
 import React from 'react';
 import {Router, Route, Link, Redirect, withRouter} from 'react-router-dom';
-import { getData } from '../actions';
+import { getData } from '../actions/memory';
 import { connect } from 'react-redux';
 
  export class oldMemory extends React.Component {
 
   oldSearch(e) {
     e.preventDefault();
-    this.props.getData()
+    this.props.getData();
   }
 
   render() {

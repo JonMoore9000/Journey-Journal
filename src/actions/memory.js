@@ -23,9 +23,16 @@ export function saveData(thePlace, theDate, theNotes) {
     };
 }
 
-export function getData(res) {
-  const promise = fetch('http://localhost:8080/logs')
-    .then(function(res) {
-      return res.json()
-    })
+export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS';
+export const GET_DATA_TRIGGERED = 'GET_DATA_TRIGGERED';
+export const GET_DATA_FAILURE = 'GET_DATA_FAILURE';
+
+export function getData() {
+  const promise = fetch('http://localhost:8080/logs');
+    return {
+      onRequest: GET_DATA_TRIGGERED,
+      onSuccess: GET_DATA_SUCCESS,
+      onFailure: GET_DATA_FAILURE,
+      promise,
+    };
 }

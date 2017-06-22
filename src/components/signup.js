@@ -11,6 +11,11 @@ export class SignUp extends React.Component {
   }
 }
 
+handleSubmit(e) {
+  e.preventDefault();
+  this.userSignUp();
+}
+
 render() {
   return(
     <div>
@@ -19,7 +24,7 @@ render() {
       <input placeholder="username" ref={input => {this.username = input}}></input><br></br>
       <input placeholder="password" type="password" ref={input => {this.password = input}}></input><br></br>
       <button onClick=
-      {this.userSignUp.bind(this)}>Sign Up</button>
+      {this.handleSubmit.bind(this)}>Sign Up</button>
     </form>
     </div>
   )
