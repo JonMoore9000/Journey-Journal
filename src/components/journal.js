@@ -10,7 +10,7 @@ export default class Journal extends React.Component {
   return(
     <div className="container">
     <h3 className="title">Travel Journal</h3>
-    <Link to='/sign-up'><button>Sign Up</button></Link>
+    <Link to='/register'><button>Sign Up</button></Link>
       <p className="home-info">A journal that allows the user to document their travels and look back and see where they have been.</p>
       <Link to='/login'><button>Login</button></Link>
     </div>

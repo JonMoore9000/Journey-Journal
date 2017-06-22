@@ -22,3 +22,10 @@ export function saveData(thePlace, theDate, theNotes) {
         promise,
     };
 }
+
+export function getData(res) {
+  const promise = fetch('http://localhost:8080/logs')
+    .then(function(res) {
+      return res.json()
+    })
+}

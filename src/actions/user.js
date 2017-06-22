@@ -15,7 +15,7 @@ const mainPage = (response, dispatch) => {
 };
 
 export function loginUser(username1, password1) {
-  const promise = fetch('http://localhost:8080/users/login', {
+  const promise = fetch('http://localhost:8080/api/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -47,7 +47,7 @@ const loginPage = (response, dispatch) => {
 };
 
 export function signUpUser(username1, password1) {
-  const promise = fetch('http://localhost:8080/users', {
+  const promise = fetch('http://localhost:8080/api/register', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

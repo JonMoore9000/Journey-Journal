@@ -17,7 +17,7 @@ const AuthExample = () => (
     <div>
       <Route exact path="/" component={Journal}/>
       <Route path="/login" component={loginThing}/>
-      <Route path="/sign-up" component={SignUp}/>
+      <Route path="/register" component={SignUp}/>
       <PrivateRoute path="/main" component={Front}/>
       <PrivateRoute path="/add" component={NewMemory}/>
       <PrivateRoute path="/get" component={OldMemory}/>
